@@ -27,8 +27,10 @@ public class Slack {
     private static final String ENDPOINT_LIST_MESSAGES = "channels.history";
     private static final String ENDPOINT_POST_MESSAGE = "chat.postMessage";
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
+    private static final String USESRNAME = "<@B2ADYT15G>";
 
     public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
+    public static final String MESSYBOT_CHANNEL_ID = "C2ADPS5MK";
 
     /**
      * Static method to test the Slack API.
@@ -74,6 +76,25 @@ public class Slack {
      * @param  messageText the message text.
      * @return the SendMessageResponse indicating ok/error or null if the connection failed.
      */
+    public static SendMessageResponse sendMessage2BotCh(String messageText) {
+
+        try {
+            messageText = URLEncoder.encode(messageText, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&username=" + USESRNAME + "&text=" + messageText);
+
+        return new SendMessageResponse(HTTPS.get(sendMessageUrl));
+    }
+
+    /**
+     * Static method to send a message to the #messbotsquad channel.
+     *
+     * @param  messageText the message text.
+     * @return the SendMessageResponse indicating ok/error or null if the connection failed.
+     */
     public static SendMessageResponse sendMessage(String messageText) {
 
         try {
@@ -82,7 +103,7 @@ public class Slack {
             throw new RuntimeException(e);
         }
 
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + BOTS_CHANNEL_ID + "&text=" + messageText);
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + MESSYBOT_CHANNEL_ID + "&username=" + USESRNAME + "&text=" + messageText);
 
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }

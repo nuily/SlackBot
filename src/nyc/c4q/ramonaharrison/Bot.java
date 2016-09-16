@@ -69,12 +69,44 @@ public class Bot {
         }
     }
 
+    public void checkMessages(String channelId) {
+        ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
+
+        if (listMessagesResponse.isOk()) {
+            List<Message> messages = listMessagesResponse.getMessages();
+
+            for (Message message : messages) {
+                String whatDidYouSay = message.getText();
+                if (whatDidYouSay.contains("messybot")) {
+                    Slack.sendMessage("sorry!");
+                }
+            }
+        } else {
+            System.err.print("Error listing messages: " + listMessagesResponse.getError());
+        }
+    }
+
     /**
-     * Sample method: sends a plain text message to the #bots channel. Prints a message indicating success or failure.
+     * Edited method: sends a plain text message to the #bots channel. Prints a message indicating success or failure.
      *
      * @param text message text.
      */
     public void sendMessageToBotsChannel(String text) {
+        SendMessageResponse sendMessageResponse = Slack.sendMessage2BotCh(text);
+
+        if (sendMessageResponse.isOk()) {
+            System.out.println("Message sent successfully!");
+        } else {
+            System.err.print("Error sending message: " + sendMessageResponse.getError());
+        }
+    }
+
+    /**
+     * Edited method: sends a plain text message to the our channel. Prints a message indicating success or failure.
+     *
+     * @param text message text.
+     */
+    public void sendMessage(String text) {
         SendMessageResponse sendMessageResponse = Slack.sendMessage(text);
 
         if (sendMessageResponse.isOk()) {
