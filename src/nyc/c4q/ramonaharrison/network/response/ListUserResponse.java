@@ -19,13 +19,14 @@ public class ListUserResponse extends Response{
     private String realName;
 //    private JSONObject profile;
 
-    private List<User> Profile = new ArrayList<User>();
+//    private List<User> Profile = new ArrayList<User>();
 
 
     public ListUserResponse(JSONObject json) {
         super(json);
 
         if (json.containsKey("user")) {
+            json = (JSONObject) json.get("user");
             if (json.containsKey("id")) {
                 this.id = (String) json.get("id");
             }
@@ -34,22 +35,18 @@ public class ListUserResponse extends Response{
                 this.name = (String) json.get("name");
             }
 
-            if (json.containsKey("profile")) {
-                JSONArray array = (JSONArray) json.get("profile");
-                this.Profile = new ArrayList<User>();
-                for (int i = 0; i < array.size(); i++) {
-                    Profile.add(new User((JSONObject) array.get(i)));
-
-//                this.profile = (JSONObject) json.get("profile");
-//                this.firstName = (String) this.profile.get("first_name");
-//                this.lastName = (String) this.profile.get("last_name");
-//                this.realName = (String) this.profile.get("real_name");
-                }
-
-
+//            if (json.containsKey("profile")) {
+//                JSONObject profileObj = (JSONObject) json.get("profile");
+//                JSONArray array = (JSONArray) profileObj.get("profile");
+//                this.Profile = new ArrayList<User>();
+//                for (int i = 0; i < array.size(); i++) {
+//                    Profile.add(new User((JSONObject) array.get(i)));
 //
-//        }
-            }
+////                this.profile = (JSONObject) json.get("profile");
+////                this.firstName = (String) this.profile.get("first_name");
+////                this.lastName = (String) this.profile.get("last_name");
+////                this.realName = (String) this.profile.get("real_name");
+//                }
         }
     }
 
@@ -74,13 +71,14 @@ public class ListUserResponse extends Response{
 //    }
 
 
-    public List<User> getProfile() {
-        return Profile;
-    }
+//    public List<User> getProfile() {
+//        return Profile;
+//    }
 
     public String getId() {
         return id;
     }
 }
+
 
 

@@ -78,19 +78,19 @@ public class Bot {
     /**
      * Finds User information using User ID
      */
-    public void whoIsThisUser(String userID) {
-        ListUserResponse listUserResponse = Slack.listUser(userID);
-        List<User> userInfo = listUserResponse.getProfile();
-
-        if (listUserResponse.isOk()) {
-            System.out.println("\nUser's Profile: " + userInfo);
-            for (User user : userInfo) {
-                System.out.println("name: " + user.getName() + ", id:" + user.getId());
-            }
-        } else {
-            System.err.print("Error listing users: " + listUserResponse.getError());
-        }
-    }
+//    public void whoIsThisUser(String userID) {
+//        ListUserResponse listUserResponse = Slack.listUser(userID);
+//        String userInfo = listUserResponse.getName();
+//
+//        if (listUserResponse.isOk()) {
+//            System.out.println("
+//
+//                System.out.println("name: " + user.getName() + ", id:" + user.getId());
+//            }
+//        } else {
+//            System.err.print("Error listing users: " + listUserResponse.getError());
+//        }
+//    }
 
     public void checkMessages(String channelId) {
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
@@ -100,13 +100,15 @@ public class Bot {
 
             for (Message message : messages) {
                 String whatDidYouSay = message.getText();
+                String userID = message.getUser();
                 if (whatDidYouSay.contains("<@U2ADRJVK9>")) {
                     if (channelId.equalsIgnoreCase(Slack.MESSYBOT_CHANNEL_ID)) {
-                        Slack.sendMessage(":unicorn_face: :poop:");
+                        Slack.sendMessage("<@"+ userID + "> :unicorn_face: :poop:");
+                        break;
                     } else {
-                        Slack.sendMessage2BotCh(":unicorn_face: :poop:");
+                        Slack.sendMessage2BotCh("<@"+ userID + "> :unicorn_face: :poop:");
+                        break;
                     }
-                    break;
                 }
             }
         } else {

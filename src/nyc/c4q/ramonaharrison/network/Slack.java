@@ -28,7 +28,6 @@ public class Slack {
     private static final String ENDPOINT_LIST_MESSAGES = "channels.history";
     private static final String ENDPOINT_POST_MESSAGE = "chat.postMessage";
     private static final String ENDPOINT_DELETE_MESSAGE = "chat.delete";
-//    private static final String BOTUSERID = "<@U2ADRJVK9>"; // rely on default username and icon
     public static final String BOTS_CHANNEL_ID = "C2ABKERFT";
     public static final String MESSYBOT_CHANNEL_ID = "C2ADPS5MK";
     private static final String ASUSER = "true";
@@ -47,9 +46,9 @@ public class Slack {
     }
 
     /**
-     * Static method to list bot info
+     * Static method to list fellow user info
      *
-     * @return the JSON with bot information
+     * @return the JSON with fellow information
      */
     public static ListUserResponse listUser(String user) {
         URL userInfo = HTTPS.stringToURL(BASE_URL + ENDPOINT_USER + "?token=" + API_KEY + "&user=" + user);
@@ -79,7 +78,7 @@ public class Slack {
      */
     public static ListMessagesResponse listMessages(String channelId) {
 
-        URL listMessagesUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_MESSAGES + "?token=" + API_KEY + "&count=1" + "&channel=" + channelId);
+        URL listMessagesUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_MESSAGES + "?token=" + API_KEY + "&count=100" + "&channel=" + channelId);
 
         return new ListMessagesResponse(HTTPS.get(listMessagesUrl));
     }

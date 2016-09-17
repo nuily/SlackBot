@@ -8,17 +8,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        while (true) {
+        while (true) {
 
             Bot myBot = new Bot();
-//        myBot.whoIsThisUser("U239S8E2C");
+//        myBot.whoIsThisUser("U238CFFLK");
 
 //        myBot.testApi();
 
 //        myBot.listChannels();
 
-        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
-//            myBot.checkMessages(Slack.BOTS_CHANNEL_ID);
+//        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
+            myBot.checkMessages(Slack.BOTS_CHANNEL_ID);
 //        }
 
             // Post "Hello, world!" to the #bots channel
@@ -30,5 +30,6 @@ public class Main {
 
 
 //        }
+        }
     }
 }
