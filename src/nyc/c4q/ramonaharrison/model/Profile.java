@@ -67,7 +67,6 @@ public class Profile {
             this.image512 = (String) json.get("image_512");
         }
 
-
     }
 
     // TODO add getters to access private

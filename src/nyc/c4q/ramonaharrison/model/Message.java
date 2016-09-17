@@ -30,6 +30,8 @@ import java.util.List;
 
 public class Message {
 
+    private String botID;
+    private String username;
     private String text;
     private String ts;
     private String user;
@@ -46,6 +48,14 @@ public class Message {
 
         if (json.get("user") != null) {
             this.user = (String) json.get("user");
+        }
+
+        if (json.get("bot_id") != null) {
+            this.botID = (String) json.get("bot_id");
+        }
+
+        if (json.get("username") != null) {
+            this.username = (String) json.get("username");
         }
 
         if (json.get("attachments") != null) {
@@ -68,6 +78,14 @@ public class Message {
 
     public String getUser() {
         return user;
+    }
+
+    public String getBotID() {
+        return botID;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public List<Attachment> getAttachments() {

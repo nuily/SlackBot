@@ -34,15 +34,13 @@ public class Attachment {
     private String thumbUrl;
     private String footer;
     private String footerIcon;
-    private String ts;
+    private Long ts;
 
     public Attachment(JSONObject json) {
         // TODO: parse an attachment from the incoming json
 
-        if (json.containsKey("fallback") ) {
-
+        if (json.containsKey("fallback")) {
             this.fallback = (String) json.get("fallback");
-
         }
 
         if (json.containsKey("color")) {
@@ -104,7 +102,7 @@ public class Attachment {
         }
 
         if (json.containsKey("ts")) {
-            this.ts = (String) json.get("ts");
+            this.ts = (Long) json.get("ts");
         }
 
     }
@@ -168,7 +166,9 @@ public class Attachment {
         return footerIcon;
     }
 
-    public String getTs() {
+    public Long getTs() {
         return ts;
+
+        // will have to alternate back between String and Long
     }
 }

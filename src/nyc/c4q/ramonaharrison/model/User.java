@@ -19,10 +19,9 @@ public class User {
     // TODO: implement private fields for each of the following user JSON keys:
 
     private String id;
-    private String name;
+    private static String name;
     private boolean deleted;
     private String color;
-    private Profile profile;
     private boolean isAdmin;
     private boolean isOwner;
     private boolean isPrimaryOwner;
@@ -52,8 +51,11 @@ public class User {
         }
 
         if (json.containsKey("profile")) {
-            JSONObject jsonProfile = (JSONObject) json.get("profile");
-            jsonProfile.containsKey("");
+            JSONObject profile = (JSONObject) json.get("profile");
+            String firstName = (String) profile.get("first_name");
+            String lastName = (String) profile.get("last_name");
+            String realName = (String) profile.get("real_name");
+            String email = (String) profile.get("email");
             // found the profile object
             // get methods and variables all stored in profile class
             // how to access that?
@@ -105,16 +107,14 @@ public class User {
         return name;
     }
 
+
+
     public boolean isDeleted() {
         return deleted;
     }
 
     public String getColor() {
         return color;
-    }
-
-    public Profile getProfile() {
-        return profile;
     }
 
     public boolean isAdmin() {

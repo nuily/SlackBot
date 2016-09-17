@@ -1,6 +1,7 @@
 package nyc.c4q.ramonaharrison;
 
 import nyc.c4q.ramonaharrison.model.Channel;
+import nyc.c4q.ramonaharrison.model.User;
 import nyc.c4q.ramonaharrison.model.Message;
 import nyc.c4q.ramonaharrison.network.*;
 import nyc.c4q.ramonaharrison.network.response.*;
@@ -46,6 +47,7 @@ public class Bot {
         }
     }
 
+
     /**
      * Sample method: prints up to the last 100 messages from a given channel. Prints an error message on failure.
      * or failure.
@@ -61,11 +63,32 @@ public class Bot {
             System.out.println("\nMessages: ");
             for (Message message : messages) {
                 System.out.println();
+                System.out.println("User: " + message.getUser());
+                System.out.println("Bot ID: " + message.getBotID());
+                System.out.println("Username: " + message.getUsername());
                 System.out.println("Timestamp: " + message.getTs());
                 System.out.println("Message: " + message.getText());
+                System.out.println("Attachments: " + message.getAttachments());
             }
         } else {
             System.err.print("Error listing messages: " + listMessagesResponse.getError());
+        }
+    }
+
+    /**
+     * Finds User information using User ID
+     */
+    public void whoIsThisUser(String userID) {
+        ListUserResponse listUserResponse = Slack.listUser(userID);
+        List<User> userInfo = listUserResponse.getProfile();
+
+        if (listUserResponse.isOk()) {
+            System.out.println("\nUser's Profile: " + userInfo);
+            for (User user : userInfo) {
+                System.out.println("name: " + user.getName() + ", id:" + user.getId());
+            }
+        } else {
+            System.err.print("Error listing users: " + listUserResponse.getError());
         }
     }
 
@@ -77,8 +100,13 @@ public class Bot {
 
             for (Message message : messages) {
                 String whatDidYouSay = message.getText();
-                if (whatDidYouSay.contains("messybot")) {
-                    Slack.sendMessage("sorry!");
+                if (whatDidYouSay.contains("<@U2ADRJVK9>")) {
+                    if (channelId.equalsIgnoreCase(Slack.MESSYBOT_CHANNEL_ID)) {
+                        Slack.sendMessage(":unicorn_face: :poop:");
+                    } else {
+                        Slack.sendMessage2BotCh(":unicorn_face: :poop:");
+                    }
+                    break;
                 }
             }
         } else {
