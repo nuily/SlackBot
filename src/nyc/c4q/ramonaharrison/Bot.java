@@ -92,7 +92,8 @@ public class Bot {
 //        }
 //    }
 
-    public void checkMessages(String channelId) {
+    public void checkMessages(String channelId) throws InterruptedException {
+        Thread.sleep(4000);
         ListMessagesResponse listMessagesResponse = Slack.listMessages(channelId);
 
         if (listMessagesResponse.isOk()) {
@@ -102,7 +103,7 @@ public class Bot {
                 String whatDidYouSay = message.getText();
                 String userID = message.getUser();
                 if (whatDidYouSay.contains("<@U2ADRJVK9>")) {
-                    if (channelId.equalsIgnoreCase(Slack.MESSYBOT_CHANNEL_ID)) {
+                    if (channelId.equalsIgnoreCase("C2FHH06DR")) {
                         Slack.sendMessage("<@"+ userID + "> :unicorn_face: :poop:");
                         break;
                     } else {

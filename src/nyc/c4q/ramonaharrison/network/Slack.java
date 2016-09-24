@@ -78,7 +78,7 @@ public class Slack {
      */
     public static ListMessagesResponse listMessages(String channelId) {
 
-        URL listMessagesUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_MESSAGES + "?token=" + API_KEY + "&count=100" + "&channel=" + channelId);
+        URL listMessagesUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_LIST_MESSAGES + "?token=" + API_KEY + "&count=1" + "&channel=" + channelId);
 
         return new ListMessagesResponse(HTTPS.get(listMessagesUrl));
     }
@@ -116,7 +116,7 @@ public class Slack {
             throw new RuntimeException(e);
         }
 
-        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=" + MESSYBOT_CHANNEL_ID /*+ "&username=" + USERNAME*/ + "&as_user=" + ASUSER + "&text=" + messageText);
+        URL sendMessageUrl = HTTPS.stringToURL(BASE_URL + ENDPOINT_POST_MESSAGE + "?token=" + API_KEY + "&channel=C2FHH06DR" /*+ "&username=" + USERNAME*/ + "&as_user=" + ASUSER + "&text=" + messageText);
 
         return new SendMessageResponse(HTTPS.get(sendMessageUrl));
     }

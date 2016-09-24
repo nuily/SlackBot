@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         while (true) {
 
@@ -18,7 +18,7 @@ public class Main {
 //        myBot.listChannels();
 
 //        myBot.listMessages(Slack.BOTS_CHANNEL_ID);
-            myBot.checkMessages(Slack.BOTS_CHANNEL_ID);
+            myBot.checkMessages("C2FHH06DR");
 //        }
 
             // Post "Hello, world!" to the #bots channel
@@ -26,7 +26,8 @@ public class Main {
             // Post to #messbotsquad
 //        myBot.sendMessage("can I post in this channel & in my private channel?");
             // Post a pineapple photo to the #bots channel
-//        myBot.sendMessage("http://weknowyourdreams.com/images/pineapple/pineapple-07.jpg");
+//        myBot.sendMessage("http://wek
+// nowyourdreams.com/images/pineapple/pineapple-07.jpg");
 
 
 //        }
